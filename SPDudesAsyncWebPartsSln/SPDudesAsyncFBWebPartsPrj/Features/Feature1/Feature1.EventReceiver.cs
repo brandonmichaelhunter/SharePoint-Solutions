@@ -21,12 +21,10 @@ namespace SPDudesAsyncFBWebPartsPrj.Features.Feature1
         // Uncomment the method below to handle the event raised after a feature has been activated.
         private SPFile _homePage;
         protected SPWeb _currentWeb;
-        private bool _asyncWPExists = false;
         public override void FeatureActivated(SPFeatureReceiverProperties properties)
         {
             try
             {
-                System.Diagnostics.Debugger.Launch();
                 /* Retrieve an instance of the current website to the SPWeb object.*/
                 SPSite siteCollection = (SPSite)properties.Feature.Parent;
                 this._currentWeb = siteCollection.RootWeb;
@@ -116,16 +114,7 @@ namespace SPDudesAsyncFBWebPartsPrj.Features.Feature1
                 throw;
             }
         }
-        //public override void FeatureActivated(SPFeatureReceiverProperties properties)
-        //{
-        //}
-
-
-        // Uncomment the method below to handle the event raised before a feature is deactivated.
-
-        //public override void FeatureDeactivating(SPFeatureReceiverProperties properties)
-        //{
-        //}
+       
 
 
         // Uncomment the method below to handle the event raised after a feature has been installed.
