@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="SPDudes.AsyncWP1.AsyncWP1, SPDudes.FB.AsyncWebParts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81a9f654f3cc602d" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Asynchronus WebPart Example 1</property>
+        <property name="Description" type="string">This webpart simiulates a long running method call across the network.</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

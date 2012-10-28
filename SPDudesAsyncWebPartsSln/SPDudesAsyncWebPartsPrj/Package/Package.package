@@ -1,3 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package dslVersion="1.0.0.0" Id="7ad7bf43-d926-426a-bc1c-1adf4cadf6d0" solutionId="7ad7bf43-d926-426a-bc1c-1adf4cadf6d0" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" name="SPDudesAsyncWebPartsPrj">
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="7ad7bf43-d926-426a-bc1c-1adf4cadf6d0" solutionId="7ad7bf43-d926-426a-bc1c-1adf4cadf6d0" resetWebServer="false" name="SPDudesAsyncWebPartsPrj" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="6e12506b-fe4d-491f-8ad5-17561a33e5b4" />
+  </features>
 </package>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="21d9d85d-d6b7-4022-af6f-83bb46238ff2" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="SPDudesAsyncFBWebPartsPrj.dll" DeploymentTarget="GlobalAssemblyCache">
+      <SafeControls>
+        <SafeControl Assembly="SPDudesAsyncFBWebPartsPrj, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2cc30171a59e0294" Namespace="SPDudesAsyncFBWebPartsPrj.SPDudesAsyncWP" TypeName="*" />
+      </SafeControls>
+    </Assembly>
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="SPDudesAsyncFBWebPartsPrj_Feature1\Feature.xml" />
+  </FeatureManifests>
+</Solution>

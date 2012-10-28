@@ -6,11 +6,11 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SPDudesAsyncWebPartsPrj1")]
-[assembly: AssemblyDescription("Provides a list of example asynchronous web parts")]
+[assembly: AssemblyTitle("SPDudesAsyncFBWebPartsPrj")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SPDudes")]
-[assembly: AssemblyProduct("SPDudesAsyncWebPartsPrj1")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SPDudesAsyncFBWebPartsPrj")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Security;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cc84b943-d904-4f49-9ddd-62caa7cfc845")]
+[assembly: Guid("7eb8b903-d3ea-4950-8776-f05150d4765d")]
 
 // Version information for an assembly consists of the following four values:
 //

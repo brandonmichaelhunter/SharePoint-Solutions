@@ -4,11 +4,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CC84B943-D904-4F49-9DDD-62CAA7CFC845}</ProjectGuid>
+    <ProjectGuid>{7EB8B903-D3EA-4950-8776-F05150D4765D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPDudes</RootNamespace>
-    <AssemblyName>SPDudes.FB.AsyncWebParts</AssemblyName>
+    <RootNamespace>SPDudesAsyncFBWebPartsPrj</RootNamespace>
+    <AssemblyName>SPDudesAsyncFBWebPartsPrj</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -52,34 +52,33 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncWP1\AsyncWP1.cs" />
     <Compile Include="Features\Feature1\Feature1.EventReceiver.cs">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPDudesAsyncWP\SPDudesAsyncWP.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AsyncWP1\AsyncWP1.webpart" />
-    <None Include="AsyncWP1\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{c3cacffe-7182-42ac-9b33-6a26094c1b9a}</SharePointProjectItemId>
-    </None>
     <None Include="Features\Feature1\Feature1.feature">
-      <FeatureId>{6e12506b-fe4d-491f-8ad5-17561a33e5b4}</FeatureId>
+      <FeatureId>{e9e8cb63-c206-4e33-ae0b-3fa89b32b91d}</FeatureId>
     </None>
     <None Include="key.snk" />
     <None Include="Package\Package.package">
-      <PackageId>{7ad7bf43-d926-426a-bc1c-1adf4cadf6d0}</PackageId>
+      <PackageId>{21d9d85d-d6b7-4022-af6f-83bb46238ff2}</PackageId>
     </None>
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="SPDudesAsyncWP\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a9179ff1-03b7-4b6b-8841-f0273d8a67fc}</SharePointProjectItemId>
+    </None>
+    <None Include="SPDudesAsyncWP\SPDudesAsyncWP.webpart" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="AsyncWP1\Elements.xml" />
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
+    <Content Include="SPDudesAsyncWP\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />

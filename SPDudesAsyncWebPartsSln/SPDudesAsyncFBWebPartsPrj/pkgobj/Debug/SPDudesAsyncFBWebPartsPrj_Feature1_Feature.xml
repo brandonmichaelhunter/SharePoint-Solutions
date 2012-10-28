@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="SPDudesAsyncFBWebPartsPrj Feature1" Id="f10f5c8c-3b65-4ef9-b439-784992431191" ReceiverAssembly="SPDudesAsyncFBWebPartsPrj, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2cc30171a59e0294" ReceiverClass="SPDudesAsyncFBWebPartsPrj.Features.Feature1.Feature1EventReceiver" Scope="Site">
+  <ElementManifests>
+    <ElementManifest Location="SPDudesAsyncWP\Elements.xml" />
+    <ElementFile Location="SPDudesAsyncWP\SPDudesAsyncWP.webpart" />
+  </ElementManifests>
+</Feature>

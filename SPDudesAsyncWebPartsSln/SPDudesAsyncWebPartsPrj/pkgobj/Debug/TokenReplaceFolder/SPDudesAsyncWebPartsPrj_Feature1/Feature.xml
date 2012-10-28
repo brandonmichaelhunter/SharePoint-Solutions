@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="Asynchronous Web Parts (SPDudes)" Description="Provides a collection of asynchronus web parts and adds then to the home page of a team site." Id="4d8533a3-af98-410a-ae50-0308337e26d1" ReceiverAssembly="SPDudes.FB.AsyncWebParts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81a9f654f3cc602d" ReceiverClass="SPDudes.Features.Feature1.Feature1EventReceiver" Scope="Site">
+  <ElementManifests>
+    <ElementManifest Location="AsyncWP1\Elements.xml" />
+    <ElementFile Location="AsyncWP1\AsyncWP1.webpart" />
+  </ElementManifests>
+</Feature>

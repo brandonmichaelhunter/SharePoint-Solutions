@@ -1,0 +1,5 @@
+C:\Users\Administrator\Documents\GitHub\SharePoint-Solutions\SPDudesAsyncWebPartsSln\SPDudesAsyncFBWebPartsPrj\bin\Debug\SPDudesAsyncFBWebPartsPrj.dll
+C:\Users\Administrator\Documents\GitHub\SharePoint-Solutions\SPDudesAsyncWebPartsSln\SPDudesAsyncFBWebPartsPrj\bin\Debug\SPDudesAsyncFBWebPartsPrj.pdb
+C:\Users\Administrator\Documents\GitHub\SharePoint-Solutions\SPDudesAsyncWebPartsSln\SPDudesAsyncFBWebPartsPrj\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\SharePoint-Solutions\SPDudesAsyncWebPartsSln\SPDudesAsyncFBWebPartsPrj\obj\Debug\SPDudesAsyncFBWebPartsPrj.dll
+C:\Users\Administrator\Documents\GitHub\SharePoint-Solutions\SPDudesAsyncWebPartsSln\SPDudesAsyncFBWebPartsPrj\obj\Debug\SPDudesAsyncFBWebPartsPrj.pdb
