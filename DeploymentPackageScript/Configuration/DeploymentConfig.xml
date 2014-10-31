@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeploymentConfig AppPoolName="SharePoint - 80" LogFileName="SampleLog.log" 
+                  DebugMode="false" 
+                  RequiresIISReset="true" 
+                  RequresTimerJobReset="true">
+	<Solutions WebAppUrl="http://<SharePointSite>" >
+		<Solution Name="Sample.wsp"  
+				  RequiresGACDeployment="TRUE">
+			<Features>
+				<!-- Thoughts: Adding an attribute to set the -Force and -Confirm switches -->
+				<Feature Name="Sample._WebParts"
+						 Url="http://<SharePointSite>/" />
+				<Feature Name="Sample._Lists"
+						 Url="http://<SharePointSite>/" />
+			</Features>
+            <Scripts>
+             <Script Name="PopulateListData.ps1" />
+            </Scripts>
+		</Solution>
+	</Solutions>
+</DeploymentConfig>
