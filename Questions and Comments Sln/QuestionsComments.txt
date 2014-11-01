@@ -1,0 +1,114 @@
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <style>
+  label{
+   font-size:12px;
+   font-weight:bold;
+  }
+  .controlPanels{
+    margin-bottom: 2%;
+  }
+  </style>
+  <script>
+   SP.SOD.executeOrDelayUntilScriptLoaded(init, "SP.js");
+   var currentUserEmail = "";
+   var spUser = null;
+   function init()
+   {
+      $("#ddlSubject").change(function()
+      {
+
+          if($("#ddlSubject option:selected").val() == "Support Question")
+          {
+            $("#divHelpPageLink").show();
+          }
+          else
+          {
+            $("#divHelpPageLink").hide();
+          }
+      });  
+      GetUserContext()
+   }
+   function GetUserContext()
+   {
+      var spCtx = new SP.ClientContext.get_current();
+      var spWeb = spCtx.get_web();
+      spCtx.load(spWeb);
+      spUser = spWeb.get_currentUser();
+      spUser.retrieve();
+      spCtx.executeQueryAsync(Function.createDelegate(this, this.GetCurrentUserEmail), Function.createDelegate(this,this.onQueryFailed))
+   }
+   function GetCurrentUserEmail()
+   {
+      currentUserEmail = spUser.get_email();
+   }
+   function onQueryFailed(sender, args) {
+
+    alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+   }
+   function SubmitComments()
+   {
+     var userComments   = $("#txtComments").val();
+     var subject        = $("#ddlSubject option:selected").val();
+     var title          = $("#txtTitle").val(); 
+     var emailSubject   = encodeURIComponent($("#txtTitle").val()).replace(/'/g, "'");
+     var spCtx          = SP.ClientContext.get_current();
+     var spWeb          = spCtx.get_web();
+     var spList         = spWeb.get_lists().getByTitle('QuestionsAndComments');
+     var spListItemInfo = new SP.ListItemCreationInformation();
+     var spListItem     = spList.addItem(spListItemInfo);
+     spListItem.set_item('Title',title);
+     spListItem.set_item('Comments',userComments);
+     spListItem.set_item('UserEmail', currentUserEmail);
+     spListItem.set_item('Subject',subject);
+     spListItem.set_item('EmailSubject', emailSubject)
+
+     spListItem.update();
+     spCtx.load(spListItem);
+     spCtx.executeQueryAsync(Function.createDelegate(this,this.SubmitCommentSucceeded), Function.createDelegate(this, this.SubmitCommentFailed))
+     
+   }
+   function SubmitCommentSucceeded()
+   {
+      $("#txtComments").val("");
+      $("#lblMessage").show().delay(5000).fadeOut();
+      setTimeout('CloseModalDialog()',3000)
+   }
+   function SubmitCommentFailed(sender, args)
+   {
+        alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+   }
+   function CloseModalDialog()
+   {
+      SP.UI.ModalDialog.commonModalDialogClose(1, 'Submitted');
+   }
+  </script>
+<body>
+  <div class='container'>
+  <div><h2>Provide any questions, issues or comments that you have about the site.</h2></div>
+  <div>
+  </div>
+  <div><label>What is the title of your question or comment?</div>
+  <div class='controlPanels'><input type="text" id="txtTitle" style='width:390px' /></div>
+  <div><label>What is the subject of your question or comment</label></div>
+  <div class='controlPanels'>
+  <div>
+   <select id="ddlSubject" style='width:390px'>
+    <option value="" selected></option>
+    <option value="Support Question">Support Question (Do you have a general application question')</option>
+    <option value="Support Issue">Support Issue (Did you find a problem with the application or site?)</option>
+    <option value="Support Security">Security Related(Requesting access or do you want to know who has access to a list(s), document(s) or page(s)?)</option>
+    <option value="Enhancements">Enhancements (How can we improve your experience on the site?)</option>
+   </select>
+  </div>
+  <div id="divHelpPageLink" style="display:none; margin-top:5px; font-size:12px; font-weight:bold;">Did you check our <a href='#'>'How To'</a> or <a href='#'>FAQ</a> pages? Both pages were designed help you use the ATS.</div>
+  </div>
+  
+  <div><label>Questions and Comments</label></div>
+  <div class='controlPanels'><textarea id="txtComments" rows="10" cols="100"></textarea></div>
+  
+  <div class='controlPanels'><input id="btnSubmit" type="button" value="Submit" onclick="SubmitComments()" />&nbsp;&nbsp;
+       <input id="btnCancel" type="button" value="Cancel" onclick="CloseModalDialog()" /></div>
+  <div><label id="lblMessage" style='display:none'>Thank you for your input. We will get back with your shortly.</label></div>
+  </div>
+</body>
+</html>
