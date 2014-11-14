@@ -1,0 +1,48 @@
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script >
+$(document).ready(function()
+{
+	var Roles = ["Created"]
+	var Role = null;
+	for(index in Roles)
+	{
+		var ViewName = Roles[index];
+		$("span:contains('"+ViewName+"')").each(function()
+		{
+			if($(this).text() == ViewName)
+			{
+			   var ChangeWebPartTitle = $(this).text() +" (3)";
+			   $(this).text(ChangeWebPartTitle) 
+			   var webPartLink = $(this).parent().parent();
+			   var AnchorLinkClassName = ViewName+"_Button";
+			   webPartLink.addClass(AnchorLinkClassName);
+			   webPartLink.attr("href","");
+			   $(this).append("<img src='http://kl-sp10prod/sites/ET/orgtrack/ATS/SiteAssets/CloseArrow.png' />")
+			   var tbody = $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().addClass(""+ViewName+"_TBody");
+			   var GridRow = $("."+ViewName+"_TBody tr:nth-child(2)");
+			   GridRow.addClass(""+ViewName+"_GridRow"); 
+			   $("."+AnchorLinkClassName+"").click(function()
+			   {
+			   		alert("I have been clicked");
+			   		return false;
+			   })
+			}
+		});
+	}
+});
+
+function runEffect(ElementID, ImgClass) {
+      var options = {};
+   	  if($("#"+ElementID+"").is(":visible")){
+   	  	 $("."+ImgClass+"").attr("src","OpenArrow.png")	
+   	  }
+   	  else{
+   	  	 $("."+ImgClass+"").attr("src","CloseArrow.png")	
+   	  }
+      // run the effect
+      $("#"+ElementID+"").toggle("blind", options, 500 );
+    };
+</script>
+<body>
+</body>
