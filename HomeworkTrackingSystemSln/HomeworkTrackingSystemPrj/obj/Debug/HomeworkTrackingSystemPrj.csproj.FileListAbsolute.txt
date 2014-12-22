@@ -1,0 +1,5 @@
+C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\bin\Debug\HomeworkTrackingSystemPrj.dll
+C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\bin\Debug\HomeworkTrackingSystemPrj.pdb
+C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.dll
+C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.pdb
+C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.csprojResolveAssemblyReference.cache

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="2a698f3e-d936-405f-96dd-9d0d628685fe" SharePointProductVersion="14.0">
+  <Assemblies>
+    <Assembly Location="HomeworkTrackingSystemPrj.dll" DeploymentTarget="GlobalAssemblyCache" />
+  </Assemblies>
+  <FeatureManifests>
+    <FeatureManifest Location="HomeworkTrackingSystemPrj_KS.ProvisionArtifacts\Feature.xml" />
+  </FeatureManifests>
+</Solution>

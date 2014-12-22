@@ -1,0 +1,5 @@
+C:\GitHub\HomeworkTrackingSystemSln\Test.SolutionArtifact\bin\Debug\Test.SolutionArtifact.exe
+C:\GitHub\HomeworkTrackingSystemSln\Test.SolutionArtifact\bin\Debug\Test.SolutionArtifact.pdb
+C:\GitHub\HomeworkTrackingSystemSln\Test.SolutionArtifact\obj\x86\Debug\Test.SolutionArtifact.csprojResolveAssemblyReference.cache
+C:\GitHub\HomeworkTrackingSystemSln\Test.SolutionArtifact\obj\x86\Debug\Test.SolutionArtifact.exe
+C:\GitHub\HomeworkTrackingSystemSln\Test.SolutionArtifact\obj\x86\Debug\Test.SolutionArtifact.pdb

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="2a698f3e-d936-405f-96dd-9d0d628685fe" solutionId="2a698f3e-d936-405f-96dd-9d0d628685fe" resetWebServer="false" name="HomeworkTrackingSystemPrj" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="c5ff3e07-4850-4c17-80ab-c661e4bfdd7e" />
+  </features>
+</package>

@@ -1,0 +1,331 @@
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+  <style>
+   .RemoveBorders
+   {
+      /* This is for IE */
+      border: 0px !important;
+   }
+   /* Colors the web part title link for various senarios */
+   .WebPartTitleLink, .WebPartTitleLink:link,  .WebPartTitleLink:hover, .WebPartTitleLink:active, .WebPartTitleLink:visited 
+   { 
+      color: #31465B !important; 
+      display:block;
+      width: 100%;
+   }
+
+   /* Highlights the web part title border row. */
+   .HighlightWebPartBorder 
+   { 
+      background-color: #31465B; 
+      border-spacing:0px; 
+   }
+   
+   /* Colors the Web Part Title */
+   .WebPartTitleStyle 
+   { 
+      color:white; 
+      font-weight:bold; 
+      text-transform:uppercase; 
+   }
+
+   /* Colors the borders around the web part title. */
+   .ms-WPBorder, .ms-WPBorderBorderOnly, .ms-wpTdSpace, .ms-WPHeader td
+   { 
+      border: 1px solid #31465B; 
+   }
+ 
+   /* Hide web part title border on hover */
+   .s4-wpcell:hover .ms-WPHeader td, .s4-wpActive .ms-WPHeader td, .s4-wpcell .ms-WPSelected .ms-WPHeader td 
+   { 
+      border-bottom: 1px solid #31465B; 
+   }
+
+   /* Hide web part container border in edit mode */
+   .s4-wpActive .s4-wpTopTable, .s4-wpActive .ms-WPSelected 
+   { 
+      border: 1px solid #31465B; 
+   }
+  
+   .CollapseExpand
+   {
+      color:white;
+      font-size:14px;
+      padding-right: 5px;
+   }
+   .Collapse:after
+   {
+      content:'+';
+      color:white; 
+      font-size: 20px; 
+      padding-right:1px;
+   }
+   .Expand:after
+   {
+      content: '-'
+      color:white; 
+      font-size: 20px; 
+      padding-right:1px;
+   }
+  </style>
+<script >
+/* Need to clean up code */
+var webRelativeUrl = "http://"+window.location.hostname+""+_spPageContextInfo.webServerRelativeUrl;
+$(document).ready(function()
+{
+  LoadWebPartDetails();
+  SP.SOD.executeOrDelayUntilScriptLoaded(GetNumberOfItems, "SP.js")
+})
+//;
+function LoadWebPartDetails()
+{
+  var Roles = ["Created", "Action Lead", "Action Backup", "Assigned", "Info Copied"]
+  var Role = null;
+  for(index in Roles)
+  {
+    var ViewName = Roles[index];
+    $("span:contains('"+ViewName+"')").each(function()
+    {
+      if($(this).text() == ViewName)
+      {
+         var RoleName = ViewName
+         ViewName = ViewName.replace(/\s/g,'');
+         var GridRowClassName = ViewName+"_GridRow";
+         var spanNumberOfItemsClassName = ViewName+"_Span";
+         var CollapseExpandClassName = ViewName+"_CollapseExpand";
+         $(this).append("<span class='"+spanNumberOfItemsClassName+" WebPartTitleStyle'>(0)</span>")
+         $(this).before("<span class='"+CollapseExpandClassName+" CollapseExpand' style=''>+</span>")
+         $(this).addClass("WebPartTitleStyle")
+         $(this).closest("tr.ms-WPHeader").addClass("HighlightWebPartBorder")
+
+         var webPartLink = $(this).parent().parent();
+         webPartLink.addClass("WebPartTitleLink");
+         var AnchorLinkClassName = ViewName+"_Button";
+         webPartLink.addClass(AnchorLinkClassName);
+         webPartLink.attr("href","");
+         
+
+         var tbody = $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().addClass(""+ViewName+"_TBody");
+         var GridRow = $("."+ViewName+"_TBody tr:nth-child(2)");
+         
+         GridRow.addClass(""+ViewName+"_GridRow"); 
+         GridRow.addClass("WebPartGridRow")
+         /* Register an onclick event on the web part title link */
+         $("."+GridRowClassName+"").hide();
+         $("."+AnchorLinkClassName+"").click(function()
+         {
+            ShowHideWebPartGrid(GridRowClassName,CollapseExpandClassName)
+            return false;
+         });
+         
+      }
+    });
+
+  }
+  //;
+
+}
+var CreatedByTasks;
+var ActionLeadTasks;
+var ActionBackupTasks;
+var AssignedTasks;
+var InfoCopiesTasks;
+var Role_Name ="";
+function GetNumberOfItems()
+{
+  var NumberOfItems = 0;
+  var spCtx =  new SP.ClientContext.get_current();
+    var spWeb = spCtx.get_web();
+    spCtx.load(spWeb);
+    var listName = "Transmittals"
+    var spList = spWeb.get_lists().getByTitle(listName);
+    
+
+    var camlQuery = new SP.CamlQuery();
+    var AuthorQuery = "<View><Query><Where><Eq><FieldRef Name='Author' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var ActionLeadQuery = "<View><Query><Where><Eq><FieldRef Name='ActionLead' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var ActionBackupQuery = "<View><Query><Where><Eq><FieldRef Name='ActionBackup' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var AssignedQuery = "<View><Query><Where><Eq><FieldRef Name='Assignee' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var InfoCopiesQuery = "<View><Query><Where><Eq><FieldRef Name='InfoCopies' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    camlQuery.set_viewXml(AuthorQuery);
+    this.CreatedByTasks = spList.getItems(camlQuery);
+    spCtx.load(this.CreatedByTasks);
+    
+    camlQuery.set_viewXml(ActionLeadQuery);
+    this.ActionLeadTasks = spList.getItems(camlQuery);
+    spCtx.load(this.ActionLeadTasks);
+
+    camlQuery.set_viewXml(ActionBackupQuery);
+    this.ActionBackupTasks = spList.getItems(camlQuery);
+    spCtx.load(this.ActionBackupTasks);
+
+    camlQuery.set_viewXml(AssignedQuery);
+    this.AssignedTasks = spList.getItems(camlQuery);
+    spCtx.load(this.AssignedTasks);
+
+    camlQuery.set_viewXml(InfoCopiesQuery);
+    this.InfoCopiesTasks = spList.getItems(camlQuery);
+    spCtx.load(this.InfoCopiesTasks);
+    
+    spCtx.executeQueryAsync(Function.createDelegate(this, this.onSuccess), Function.createDelegate(this, this.onFailure));
+}
+function onSuccess()
+{
+  var CreatedByCount  = this.CreatedByTasks.getEnumerator().$1k_0;
+  var ActionLeadCount = this.ActionLeadTasks.getEnumerator().$1k_0;
+  var ActionBackupCount  = this.ActionBackupTasks.getEnumerator().$1k_0;
+  var AssignedCount = this.AssignedTasks.getEnumerator().$1k_0;
+  var InfoCopesCount = this.InfoCopiesTasks.getEnumerator().$1k_0;
+
+  $(".Created_Span").html(" <span style='font-size:10px'>(You have "+CreatedByCount+" action item(s) currently in your queue)</span>");
+  $(".ActionLead_Span").html(" <span style='font-size:10px'>(You have "+ActionLeadCount+" action item(s) currently in your queue)</span>");
+  $(".ActionBackup_Span").html(" <span style='font-size:10px'>(You have "+ActionBackupCount+" action item(s) currently in your queue)</span>");
+  $(".Assigned_Span").html(" <span style='font-size:10px'>(You have "+AssignedCount+" action item(s) currently in your queue)</span>");
+  $(".InfoCopied_Span").html(" <span style='font-size:10px'>(You have "+InfoCopesCount+" action item(s) currently in your queue)</span>");
+  
+}
+function onFailure(sender, args)
+{
+  alert("Request failed: " + args.get_message() + "\n" + args.get_stackTrace());
+}
+function ShowHideWebPartGrid(GridRowElementClassName, CollapseElementClassName) {
+      var options = {};
+
+      if($("."+GridRowElementClassName+"").is(":visible")){ 
+         $("."+GridRowElementClassName+"").hide();
+         $("."+CollapseElementClassName+"").text('+')
+      }
+      else{
+         $("."+GridRowElementClassName+"").show();
+         $("."+CollapseElementClassName+"").text('-')
+         
+      }
+    };
+</script>
+<body>
+</body>
+---------------------------------------------------------------------------------------------------------------------
+
+<!-- Reference the jQueryUI theme's stylesheet on the Google CDN. Here we're using the "Start" theme --> 
+<link  type="text/css" rel="stylesheet" href="../SiteAssets/Styles/jquery-ui.css" />
+<!-- Reference jQuery on the Google CDN --> 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- Reference jQueryUI on the Google CDN --> 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script> 
+
+<style type="text/css">
+</style>
+<script >
+jQuery(document).ready(function($) {
+         $(".s4-wpcell").hide();
+         $(".s4-wpcell-plain").hide();
+         //Put the Web Part Title for all the Web Parts you wish
+         //to put into the tabbed view into the array below.
+         setTimeout(function() {
+            HillbillyTabs(["Created", "Action Lead", "Action Backup", "Assigned", "Info Copied" ]);
+        }, 0);
+        SP.SOD.executeOrDelayUntilScriptLoaded(GetNumberOfItems, "SP.js");
+    });
+
+function HillbillyTabs(webPartTitles)
+    {
+        for(index in webPartTitles)
+        {
+            var title = webPartTitles[index];
+            var ViewName = title.replace(/\s/g,'')+"_Tab";
+            $("#HillbillyTabs").append('<li><a href="#Tab'+index+'" id="TabHead'+index+'" class="'+ViewName+'" onclick="SetActiveTab(this.id);">'+
+title+'</a></li>').after('<div id="Tab'+index+'"></div>');
+            $("span:contains('"+title+"')").each(function(){
+                if ($(this).text() == title){
+                   var webPart = $(this).hide().closest("span").closest("[id^='MSOZoneCell_WebPart']");
+                   if ($(webPart).contents().html() != undefined)
+                   {
+                           webPart = $(webPart).contents();
+                   }
+                   $("#Tab" + index).append((webPart));
+            }});
+        }
+        $("#tabsContainer").tabs();
+        $(".s4-wpcell").show();
+         $(".s4-wpcell-plain").show();
+
+    }
+
+
+
+var CreatedByTasks;
+var ActionLeadTasks;
+var ActionBackupTasks;
+var AssignedTasks;
+var InfoCopiesTasks;
+var Role_Name ="";
+function GetNumberOfItems()
+{
+  var NumberOfItems = 0;
+  var spCtx =  new SP.ClientContext.get_current();
+    var spWeb = spCtx.get_web();
+    spCtx.load(spWeb);
+    var listName = "Transmittals"
+    var spList = spWeb.get_lists().getByTitle(listName);
+    
+
+    var camlQuery = new SP.CamlQuery();
+    var AuthorQuery = "<View><Query><Where><Eq><FieldRef Name='Author' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var ActionLeadQuery = "<View><Query><Where><Eq><FieldRef Name='ActionLead' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var ActionBackupQuery = "<View><Query><Where><Eq><FieldRef Name='ActionBackup' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var AssignedQuery = "<View><Query><Where><Eq><FieldRef Name='Assignee' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    var InfoCopiesQuery = "<View><Query><Where><Eq><FieldRef Name='InfoCopies' LookupId='True' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where></Query></View>";
+    camlQuery.set_viewXml(AuthorQuery);
+    this.CreatedByTasks = spList.getItems(camlQuery);
+    spCtx.load(this.CreatedByTasks);
+    
+    camlQuery.set_viewXml(ActionLeadQuery);
+    this.ActionLeadTasks = spList.getItems(camlQuery);
+    spCtx.load(this.ActionLeadTasks);
+
+    camlQuery.set_viewXml(ActionBackupQuery);
+    this.ActionBackupTasks = spList.getItems(camlQuery);
+    spCtx.load(this.ActionBackupTasks);
+
+    camlQuery.set_viewXml(AssignedQuery);
+    this.AssignedTasks = spList.getItems(camlQuery);
+    spCtx.load(this.AssignedTasks);
+
+    camlQuery.set_viewXml(InfoCopiesQuery);
+    this.InfoCopiesTasks = spList.getItems(camlQuery);
+    spCtx.load(this.InfoCopiesTasks);
+    
+    spCtx.executeQueryAsync(Function.createDelegate(this, this.onSuccess), Function.createDelegate(this, this.onFailure));
+}
+function onSuccess(){
+  var CreatedByCount  = this.CreatedByTasks.getEnumerator().$1k_0;
+  $(".Created_Tab").append(" <span style='font-size:10px'>("+CreatedByCount+")</span>");
+  $(".Created_Tab").attr("title", "You have "+CreatedByCount+" action items currently in your queue.")
+
+  var ActionLeadCount = this.ActionLeadTasks.getEnumerator().$1k_0;
+  $(".ActionLead_Tab").append(" <span style='font-size:10px'>("+ActionLeadCount+")</span>");
+  $(".ActionLead_Tab").attr("title", "You have "+ActionLeadCount+" action items currently in your queue.")
+
+  var ActionBackupCount  = this.ActionBackupTasks.getEnumerator().$1k_0;
+  $(".ActionBackup_Tab").append(" <span style='font-size:10px' >("+ActionBackupCount+")</span>");
+  $(".ActionBackup_Tab").attr("title", "You have "+ActionBackupCount+" action items currently in your queue.")
+
+  var AssignedCount = this.AssignedTasks.getEnumerator().$1k_0;
+  $(".Assigned_Tab").append(" <span style='font-size:10px' >("+AssignedCount+")</span>");
+  $(".Assigned_Tab").attr("title", "You have "+AssignedCount+" action items currently in your queue.")
+
+  var InfoCopesCount = this.InfoCopiesTasks.getEnumerator().$1k_0;
+  $(".InfoCopied_Tab").append(" <span style='font-size:10px' >("+InfoCopesCount+")</span>");
+  $(".InfoCopied_Tab").attr("title", "You have "+InfoCopesCount+" action items currently in your queue.")
+
+}
+function onFailure(sender, args)
+{
+  alert("Request failed: " + args.get_message() + "\n" + args.get_stackTrace());
+}
+
+</script>
+
+<div id="tabsContainer"><ul id="HillbillyTabs"></ul></div>
+<body>
+</body>
