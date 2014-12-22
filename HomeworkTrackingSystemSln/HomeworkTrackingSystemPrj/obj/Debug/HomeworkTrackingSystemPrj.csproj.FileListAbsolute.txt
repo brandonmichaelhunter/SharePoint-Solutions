@@ -3,3 +3,8 @@ C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\bin\Debug\Homework
 C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.dll
 C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.pdb
 C:\GitHub\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.csprojResolveAssemblyReference.cache
+\\99.99.99.60\cloudfolders\access\TNPBFDUX7X\Brandon-Hunter-s-Cloud-Folder--cd8279-\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\bin\Debug\HomeworkTrackingSystemPrj.dll
+\\99.99.99.60\cloudfolders\access\TNPBFDUX7X\Brandon-Hunter-s-Cloud-Folder--cd8279-\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\bin\Debug\HomeworkTrackingSystemPrj.pdb
+\\99.99.99.60\cloudfolders\access\TNPBFDUX7X\Brandon-Hunter-s-Cloud-Folder--cd8279-\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.csprojResolveAssemblyReference.cache
+\\99.99.99.60\cloudfolders\access\TNPBFDUX7X\Brandon-Hunter-s-Cloud-Folder--cd8279-\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.dll
+\\99.99.99.60\cloudfolders\access\TNPBFDUX7X\Brandon-Hunter-s-Cloud-Folder--cd8279-\HomeworkTrackingSystemSln\HomeworkTrackingSystemPrj\obj\Debug\HomeworkTrackingSystemPrj.pdb

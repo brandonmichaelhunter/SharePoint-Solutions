@@ -18,31 +18,65 @@ namespace Security
             SPUser spGroupOwner = spWeb.Users["SPDOM\\Administrator"];
             
             //TODO: Add the groups to the site and to their respective lists.
-            SPGroup AdmingGroup = spWeb.SiteGroups.Cast<SPGroup>().Where(a => a.Name == AppConstants.AdminstratorSecurityGroupName).FirstOrDefault();
-            if (AdmingGroup != null)
-            {
-                spGroupColl.Add(AppConstants.AdminstratorSecurityGroupName, spGroupOwner, spDefaultUser, "This group is only for adminstrator users.");
+            SPGroup AdminGroup = spWeb.SiteGroups.Cast<SPGroup>().Where(a => a.Name == AppConstants.SchoolAdminstratorSecurityGroupName).FirstOrDefault();
+            if (AdminGroup == null){
+                spGroupColl.Add(AppConstants.SchoolAdminstratorSecurityGroupName, spGroupOwner, spDefaultUser, "This group is only for school adminstrator users.");
             }
 
             SPGroup TeacherGroup = spWeb.SiteGroups.Cast<SPGroup>().Where(a => a.Name == AppConstants.TeacherSecurityGroupName).FirstOrDefault();
-            if (TeacherGroup != null){
+            if (TeacherGroup == null){
                 spGroupColl.Add(AppConstants.TeacherSecurityGroupName, spGroupOwner, spDefaultUser, "This group is only for teacher users.");
             }
 
             SPGroup ParentGroup = spWeb.SiteGroups.Cast<SPGroup>().Where(a => a.Name == AppConstants.ParentSecurityGroupName).FirstOrDefault();
-            if (ParentGroup != null){
+            if (ParentGroup == null){
                 spGroupColl.Add(AppConstants.ParentSecurityGroupName, spGroupOwner, spDefaultUser, "This group is only for parent users.");
             }
 
             SPGroup StudentGroup = spWeb.SiteGroups.Cast<SPGroup>().Where(a => a.Name == AppConstants.StudentSecurityGroupName).FirstOrDefault();
-            if (StudentGroup !=null){
+            if (StudentGroup == null){
                 spGroupColl.Add(AppConstants.StudentSecurityGroupName, spGroupOwner, spDefaultUser, "This group is only for student users.");
             }
-
+            
             /* Grant groups site and list level permissions. */
-            SPRoleDefinition spRoleDef = spWeb.RoleDefinitions[""];
-            SPRoleAssignment customRoleAssignment = new SPRoleAssignment(null);
-
+            if (!CheckSiteLevelPermissions(spWeb, SPRoleType.Administrator, AdminGroup))
+            {
+                if (!spWeb.IsRootWeb)
+                {
+                    
+                    if (spWeb.HasUniqueRoleAssignments == false)
+                    {
+                        spWeb.BreakRoleInheritance(true);
+                    }
+                    /*TODO: Figure out why it's assining the user Limited Access role where it should assigne it Full Control. */
+                    SPRoleDefinition roleDef = spWeb.RoleDefinitions.GetByType(SPRoleType.Administrator);
+                    SPRoleAssignment roleAssign = new SPRoleAssignment(AdminGroup);
+                    roleAssign.RoleDefinitionBindings.Add(roleDef);
+                    spWeb.RoleAssignments.Add(AdminGroup)
+                    spWeb.Update();
+                    
+                }
+            }
+        }
+        private static bool CheckSiteLevelPermissions(SPWeb spWeb, SPRoleType spRoleType, SPPrincipal spUser)
+        {
+            bool IsSiteLevlUser = false;
+            foreach (SPRoleAssignment roleAssignment in spWeb.RoleAssignments)
+            {
+                if (roleAssignment.Member.Name == spUser.Name)
+                {
+                    SPRoleDefinition currentRoleDef = spWeb.RoleDefinitions.GetByType(spRoleType);
+                    SPRoleDefinitionBindingCollection spRoleDefs = roleAssignment.RoleDefinitionBindings;
+                    foreach (SPRoleDefinition spRoleDef in spRoleDefs)
+                    {
+                        if (spRoleDef == currentRoleDef)
+                        {
+                            IsSiteLevlUser = true;
+                        }
+                    }
+                }
+            }
+            return IsSiteLevlUser;
         }
     }
 }

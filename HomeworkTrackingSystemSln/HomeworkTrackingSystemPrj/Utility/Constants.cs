@@ -12,6 +12,6 @@ namespace HomeworkTrackingSystemPrj.Utility
         public static string TeacherSecurityGroupName { get { return "Teachers"; } }
         public static string StudentSecurityGroupName { get { return "Students"; } }
         public static string ParentSecurityGroupName { get { return "Parents"; } }
-        public static string AdminstratorSecurityGroupName { get { return "Administrator"; } }
+        public static string SchoolAdminstratorSecurityGroupName { get { return "School Administrators"; } }
     }
 }
