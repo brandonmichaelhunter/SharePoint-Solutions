@@ -48,12 +48,13 @@ namespace Security
                     {
                         spWeb.BreakRoleInheritance(true);
                     }
-                    /*TODO: Figure out why it's assining the user Limited Access role where it should assigne it Full Control. */
-                    SPRoleDefinition roleDef = spWeb.RoleDefinitions.GetByType(SPRoleType.Administrator);
+
                     SPRoleAssignment roleAssign = new SPRoleAssignment(AdminGroup);
+                    SPRoleDefinition roleDef = spWeb.RoleDefinitions.GetByType(SPRoleType.Administrator);
                     roleAssign.RoleDefinitionBindings.Add(roleDef);
-                    spWeb.RoleAssignments.Add(AdminGroup)
-                    spWeb.Update();
+                    spWeb.RoleAssignments.Add(roleAssign);
+                                        
+                    
                     
                 }
             }
