@@ -9,9 +9,9 @@ namespace HomeworkTrackingSystemPrj.Utility
     {
         public static string ContentTypeGroupName { get { return "Homework Tracker System - Content Types"; } }
         public static string SiteColumnGroupName { get { return "Homework Tracker System - Site Columns"; } }
-        public static string TeacherSecurityGroupName { get { return "Teachers"; } }
-        public static string StudentSecurityGroupName { get { return "Students"; } }
-        public static string ParentSecurityGroupName { get { return "Parents"; } }
-        public static string SchoolAdminstratorSecurityGroupName { get { return "School Administrators"; } }
+        public static string HTS_TeacherSecurityGroupName { get { return "HTS Teachers"; } }
+        public static string HTS_StudentSecurityGroupName { get { return "HTS Students"; } }
+        public static string HTS_ParentSecurityGroupName { get { return "HTS Parents"; } }
+        public static string HTS_SchoolAdminstratorSecurityGroupName { get { return "HTS School Administrators"; } }
     }
 }

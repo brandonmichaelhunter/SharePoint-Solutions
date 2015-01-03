@@ -31,10 +31,6 @@ namespace HomeworkTrackingSystemPrj.Features.KS.ProvisionArtifacts
                     SiteColumns.SiteColumns.ProvisionSiteColumns(spNewWeb);
                     #endregion
 
-                    #region Create Security Groups
-                    Security.SecurityGroups.ProvisionSecurityGroups(spNewWeb);
-                    #endregion
-
                     #region Class Section
                     ContentTypes.Class.ProvisionContentType(spNewWeb);
                     Lists.Classes.AssociateCTWithList(spNewWeb);
@@ -58,6 +54,12 @@ namespace HomeworkTrackingSystemPrj.Features.KS.ProvisionArtifacts
                     #region Submission Section
                     ContentTypes.Submission.ProvisionContentType(spNewWeb);
                     Lists.Submissions.AssociateCTWithList(spNewWeb);
+                    #endregion
+
+                    #region Create Security Groups
+                    Security.SecurityGroups.ProvisionSecurityGroups(spNewWeb);
+                    Security.SecurityGroups.GrantSecurityGroupsSiteLevelPermissions(spNewWeb);
+                    Security.SecurityGroups.GrantSecurityGroupsListLevelPermissions(spNewWeb);
                     #endregion
                 }
             }
