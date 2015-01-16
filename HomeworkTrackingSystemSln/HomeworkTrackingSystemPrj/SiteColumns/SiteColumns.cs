@@ -30,6 +30,7 @@ namespace HomeworkTrackingSystemPrj.SiteColumns
         public static Guid HomeworkAssignmentPointsRecievied { get { return new Guid("{EE6A920C-1BC7-4B79-B27A-65B62E0E5223}"); } }
         public static Guid HomeworkAssignmentPointsAllowed { get { return new Guid("{19167CEA-5009-4FF1-8B4B-A454402F2D1F}"); } }
         public static Guid Parents { get { return new Guid("{04B0ADA0-9758-4161-99D7-2D85178A7F2B}"); } }
+        public static Guid Teacher { get { return new Guid("{6B8D2463-155F-48F2-9FD4-7923C84B49F1}"); } }
         #endregion Custom site columns
         
         
@@ -79,19 +80,38 @@ namespace HomeworkTrackingSystemPrj.SiteColumns
             #endregion
 
             #region Student
+            //if (!spWeb.AvailableFields.Contains(Student))
+            //{
+            //    Dictionary<string, string> fp = new Dictionary<string, string>();
+            //    fp.Add("ID", Student.ToString());
+            //    fp.Add("Name", "Student");
+            //    fp.Add("Required", "TRUE");
+            //    fp.Add("StaticName", "Student");
+            //    fp.Add("DisplayName", "Student");
+            //    //fp.Add("Type", SPFieldType.Lookup.ToString());
+            //    fp.Add("Group", AppConstants.SiteColumnGroupName);
+            //    fp.Add("Type", "LookupMulti");//Enum.GetName(typeof(SPFieldType), SPFieldType.Lookup));
+            //    fp.Add("AllowMultipleValues", Boolean.TrueString);
+            //    fp.Add("ShowField", "Title");
+            //    fp.Add("List", Lists.Students.GetList(spWeb).ID.ToString());
+            //    string fieldXml = Utility.Utility.CreateFieldXMLElement(fp);
+            //    if (fieldXml != string.Empty)
+            //    {
+            //        fieldXml += "/>";
+            //        spWeb.Fields.AddFieldAsXml(fieldXml);
+            //    }
+            //}
             if (!spWeb.AvailableFields.Contains(Student))
             {
                 Dictionary<string, string> fp = new Dictionary<string, string>();
                 fp.Add("ID", Student.ToString());
                 fp.Add("Name", "Student");
-                fp.Add("Required", "TRUE");
+                fp.Add("Required", Boolean.FalseString);
                 fp.Add("StaticName", "Student");
                 fp.Add("DisplayName", "Student");
-                //fp.Add("Type", SPFieldType.Lookup.ToString());
+                fp.Add("Type", SPFieldType.User.ToString());
                 fp.Add("Group", AppConstants.SiteColumnGroupName);
-                fp.Add("Type", Enum.GetName(typeof(SPFieldType), SPFieldType.Lookup));
-                fp.Add("ShowField", "Title");
-                fp.Add("List", Lists.Students.GetList(spWeb).ID.ToString());
+
                 string fieldXml = Utility.Utility.CreateFieldXMLElement(fp);
                 if (fieldXml != string.Empty)
                 {
@@ -480,6 +500,27 @@ namespace HomeworkTrackingSystemPrj.SiteColumns
                 fp.Add("Required", Boolean.FalseString);
                 fp.Add("StaticName", "Parents");
                 fp.Add("DisplayName", "Parents");
+                fp.Add("Type", SPFieldType.User.ToString());
+                fp.Add("Group", AppConstants.SiteColumnGroupName);
+
+                string fieldXml = Utility.Utility.CreateFieldXMLElement(fp);
+                if (fieldXml != string.Empty)
+                {
+                    fieldXml += "/>";
+                    spWeb.Fields.AddFieldAsXml(fieldXml);
+                }
+            }
+            #endregion
+
+            #region Teacher
+            if (!spWeb.AvailableFields.Contains(Teacher))
+            {
+                Dictionary<string, string> fp = new Dictionary<string, string>();
+                fp.Add("ID", Teacher.ToString());
+                fp.Add("Name", "Teacher");
+                fp.Add("Required", Boolean.FalseString);
+                fp.Add("StaticName", "Teacher");
+                fp.Add("DisplayName", "Teacher");
                 fp.Add("Type", SPFieldType.User.ToString());
                 fp.Add("Group", AppConstants.SiteColumnGroupName);
 

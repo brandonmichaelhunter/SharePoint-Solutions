@@ -1,0 +1,11 @@
+Name,samAccountName,ParentOU
+Annie L. Hunter,alhunter,"CN=Users,DC=SPDOM,DC=LOC"
+Cora J. Hunter,cjhunter,"CN=Users,DC=SPDOM,DC=LOC"
+Brandon I. Hunter,bihunter,"CN=Users,DC=SPDOM,DC=LOC"
+Cameron M. Hunter,cmhunter,"CN=Users,DC=SPDOM,DC=LOC"
+Jason Zappf,jzappf,"CN=Users,DC=SPDOM,DC=LOC"
+Ronni Zappf,rzappf,"CN=Users,DC=SPDOM,DC=LOC"
+Marian Zappf,mzappf,"CN=Users,DC=SPDOM,DC=LOC"
+Robert Dallas,rdallas,"CN=Users,DC=SPDOM,DC=LOC"
+Nicole Dallas,ndallas,"CN=Users,DC=SPDOM,DC=LOC"
+Lucas Dallas,ldallas,"CN=Users,DC=SPDOM,DC=LOC"

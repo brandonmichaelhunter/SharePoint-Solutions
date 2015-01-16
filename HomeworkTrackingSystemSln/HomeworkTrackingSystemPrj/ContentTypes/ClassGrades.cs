@@ -26,9 +26,9 @@ namespace ContentTypes
             }
 
             /*Add fields to content type .*/
-            if (!ct.Fields.Contains(SiteColumns.ClassName))
+            if (!ct.Fields.Contains(SiteColumns.Class))
             {
-                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.ClassName]);
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Class]);
                 ct.FieldLinks.Add(field);
             }
 
@@ -62,7 +62,7 @@ namespace ContentTypes
                 ct.FieldLinks.Add(field);
             }
 
-            ct.Update();
+            ct.Update(true);
         }
     }
 }

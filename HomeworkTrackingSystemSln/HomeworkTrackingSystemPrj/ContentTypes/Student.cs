@@ -26,31 +26,34 @@ namespace ContentTypes
             }
 
             /*Add fields to content type .*/
-            if (!ct.Fields.Contains(SiteColumns.StudentFirstname))
-            {
-                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.StudentFirstname]);
+            //if (!ct.Fields.Contains(SiteColumns.StudentFirstname))
+            //{
+            //    SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.StudentFirstname]);
+            //    ct.FieldLinks.Add(field);
+            //}
+
+            //if (!ct.Fields.Contains(SiteColumns.StudentLastname))
+            //{
+            //    SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.StudentLastname]);
+            //    ct.FieldLinks.Add(field);
+            //}
+
+            //if (!ct.Fields.Contains(SiteColumns.StudentFullname))
+            //{
+            //    SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.StudentFullname]);
+            //    ct.FieldLinks.Add(field);
+            //}
+            if (!ct.Fields.Contains(SiteColumns.Student)){
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Student]);
                 ct.FieldLinks.Add(field);
             }
 
-            if (!ct.Fields.Contains(SiteColumns.StudentLastname))
-            {
-                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.StudentLastname]);
-                ct.FieldLinks.Add(field);
-            }
-
-            if (!ct.Fields.Contains(SiteColumns.StudentFullname))
-            {
-                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.StudentFullname]);
-                ct.FieldLinks.Add(field);
-            }
-
-            if (!ct.Fields.Contains(SiteColumns.Parents))
-            {
+            if (!ct.Fields.Contains(SiteColumns.Parents)){
                 SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Parents]);
                 ct.FieldLinks.Add(field);
             }
 
-            ct.Update();
+            ct.Update(true);
         }
     }
 }

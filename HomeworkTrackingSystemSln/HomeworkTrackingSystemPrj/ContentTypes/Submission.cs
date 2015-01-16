@@ -37,7 +37,13 @@ namespace ContentTypes
                 ct.FieldLinks.Add(field);
             }
 
-            ct.Update();
+            if (!ct.Fields.Contains(SiteColumns.IsAssignmentComplete))
+            {
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.IsAssignmentComplete]);
+                ct.FieldLinks.Add(field);
+            }
+
+            ct.Update(true);
         }
     }
 }

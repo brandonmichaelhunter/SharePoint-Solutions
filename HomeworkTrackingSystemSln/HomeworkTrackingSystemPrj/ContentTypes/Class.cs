@@ -43,8 +43,14 @@ namespace ContentTypes
                 SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Student]);
                 ct.FieldLinks.Add(field);
             }
-            
-            ct.Update();
+
+            if (!ct.Fields.Contains(SiteColumns.Teacher))
+            {
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Teacher]);
+                ct.FieldLinks.Add(field);
+            }
+
+            ct.Update(true);
         }
     }
 }

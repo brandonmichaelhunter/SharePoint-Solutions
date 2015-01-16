@@ -38,10 +38,10 @@ namespace ContentTypes
                 ct.FieldLinks.Add(field);
             }
 
-            if (!ct.Fields.Contains(SiteColumns.ClassName)){
-                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.ClassName]);
-                ct.FieldLinks.Add(field);
-            }
+            //if (!ct.Fields.Contains(SiteColumns.ClassName)){
+            //    SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.ClassName]);
+            //    ct.FieldLinks.Add(field);
+            //}
 
             if (!ct.Fields.Contains(SiteColumns.AssignmentGrade)){
                 SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.AssignmentGrade]);
@@ -68,7 +68,23 @@ namespace ContentTypes
                 ct.FieldLinks.Add(field);
             }
 
-            ct.Update();
+            if (!ct.Fields.Contains(SiteColumns.Class)){
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Class]);
+                ct.FieldLinks.Add(field);
+            }
+
+            if (!ct.Fields.Contains(SiteColumns.Teacher))
+            {
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Teacher]);
+                ct.FieldLinks.Add(field);
+            }
+
+            if (!ct.Fields.Contains(SiteColumns.Student))
+            {
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.Student]);
+                ct.FieldLinks.Add(field);
+            }
+            ct.Update(true);
         }
     }
 }
