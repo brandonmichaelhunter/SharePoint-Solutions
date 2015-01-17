@@ -5,18 +5,18 @@ using System.Text;
 using Microsoft.SharePoint;
 using HomeworkTrackingSystemPrj.Utility;
 using HomeworkTrackingSystemPrj.SiteColumns;
-
+using HomeworkTrackingSystemPrj.EventReceivers;
 namespace ContentTypes
 {
     public static class Submission
     {
         public static string ContentTypeName = "Submissions";
         public static SPContentTypeId ContentTypeID { get { return new SPContentTypeId("0x01010066187A47EAB64A9B82152A60BD6467C5"); } }
-
+        public static Guid EventReceiverID { get { return new Guid("850BD17F-F697-4A0D-AA80-02E5C296C4F0"); } }
         public static void ProvisionContentType(SPWeb spWeb)
         {
             /* Create the content type. */
-            SPContentType ct = spWeb.ContentTypes[ContentTypeID];
+            SPContentType ct = GetContentType(spWeb);
             if (ct == null)
             {
                 ct = new SPContentType(ContentTypeID, spWeb.ContentTypes, ContentTypeName);
@@ -44,6 +44,32 @@ namespace ContentTypes
             }
 
             ct.Update(true);
+        }
+        
+        private static SPContentType GetContentType(SPWeb spWeb)
+        {
+            SPContentType ct = spWeb.ContentTypes[ContentTypeID];
+            return ct;
+        }
+        public static void RegisterEventReceiverWithContentType(SPWeb spWeb, string AssemblyFullName) 
+        {
+            SPContentType ct = spWeb.ContentTypes[ContentTypeID];
+            if (ct != null)
+            {
+                /* Register the event receiver with the content type. */
+                if (!ct.EventReceivers.EventReceiverDefinitionExist(EventReceiverID))
+                {
+                    SPEventReceiverDefinition def = ct.EventReceivers.Add(EventReceiverID);
+                    def.Type = SPEventReceiverType.ItemUpdated;
+                    def.Assembly = AssemblyFullName;
+                    def.Class = typeof(EventReceivers.SubmissionsER.SubmissionsER).FullName;
+                    def.SequenceNumber = 100;
+                    def.Data = "";
+                    def.Update();
+                    ct.Update(true, false);
+                }
+
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace HomeworkTrackingSystemPrj.Features.KS.ProvisionArtifacts
             SPWeb spWeb = (SPWeb)properties.Feature.Parent;
             try
             {
-                //System.Diagnostics.Debugger.Launch();
+                System.Diagnostics.Debugger.Launch();
                 /* Provision site columns, content types and list.  */
                 using (SPWeb spNewWeb = spWeb.Site.OpenWeb(spWeb.ID))
                 {
@@ -53,6 +53,7 @@ namespace HomeworkTrackingSystemPrj.Features.KS.ProvisionArtifacts
 
                     #region Submission Section
                     ContentTypes.Submission.ProvisionContentType(spNewWeb);
+                    ContentTypes.Submission.RegisterEventReceiverWithContentType(spNewWeb, this.GetType().FullName);
                     Lists.Submissions.AssociateCTWithList(spNewWeb);
                     #endregion
 
