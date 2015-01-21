@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <Receivers Scope="Web">
+  <!-- <Receivers Scope="Web">
       <Receiver>
         <Name>SubmissionsERItemUpdated</Name>
         <Type>ItemUpdated</Type>
         <Assembly>$SharePoint.Project.AssemblyFullName$</Assembly>
-        <Class>EventReceivers.SubmissionsER.SubmissionsER</Class>
+        <Class>EventReceivers.SubmissionsER</Class>
         <SequenceNumber>10000</SequenceNumber>
       </Receiver>
-
-  </Receivers>
+  </Receivers>-->
 </Elements>

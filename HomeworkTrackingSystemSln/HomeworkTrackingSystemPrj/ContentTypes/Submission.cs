@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.SharePoint;
 using HomeworkTrackingSystemPrj.Utility;
 using HomeworkTrackingSystemPrj.SiteColumns;
-using HomeworkTrackingSystemPrj.EventReceivers;
+
 namespace ContentTypes
 {
     public static class Submission
@@ -45,29 +45,33 @@ namespace ContentTypes
 
             ct.Update(true);
         }
-        
+
         private static SPContentType GetContentType(SPWeb spWeb)
         {
             SPContentType ct = spWeb.ContentTypes[ContentTypeID];
             return ct;
         }
-        public static void RegisterEventReceiverWithContentType(SPWeb spWeb, string AssemblyFullName) 
+        public static void RegisterEventReceiverWithContentType(SPWeb spWeb, string AssemblyFullName)
         {
             SPContentType ct = spWeb.ContentTypes[ContentTypeID];
             if (ct != null)
             {
-                /* Register the event receiver with the content type. */
-                if (!ct.EventReceivers.EventReceiverDefinitionExist(EventReceiverID))
-                {
-                    SPEventReceiverDefinition def = ct.EventReceivers.Add(EventReceiverID);
-                    def.Type = SPEventReceiverType.ItemUpdated;
-                    def.Assembly = AssemblyFullName;
-                    def.Class = typeof(EventReceivers.SubmissionsER.SubmissionsER).FullName;
-                    def.SequenceNumber = 100;
-                    def.Data = "";
-                    def.Update();
-                    ct.Update(true, false);
+                /* Remove event reciever if it already exists. */
+                if (ct.EventReceivers.EventReceiverDefinitionExist(EventReceiverID)){
+                    SPEventReceiverDefinition DeletedER = ct.EventReceivers[EventReceiverID];
+                    DeletedER.Delete();
                 }
+
+                /* Register the event receiver with the content type. */
+                SPEventReceiverDefinition def = ct.EventReceivers.Add(EventReceiverID);
+                def.Type = SPEventReceiverType.ItemUpdated;
+                def.Assembly = AssemblyFullName;
+                def.Class = typeof(EventReceivers.SubmissionsER).FullName;
+                def.SequenceNumber = 100;
+                def.Data = "";
+                def.Update();
+                ct.Update(true, false);
+
 
             }
         }

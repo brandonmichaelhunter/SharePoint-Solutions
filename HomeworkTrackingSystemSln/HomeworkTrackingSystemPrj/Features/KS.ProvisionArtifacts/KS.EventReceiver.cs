@@ -48,12 +48,16 @@ namespace HomeworkTrackingSystemPrj.Features.KS.ProvisionArtifacts
 
                     #region Homework Assignments Section
                     ContentTypes.HomeworkAssignments.ProvisionContentType(spNewWeb);
+                    string HomeworkAssignmentERFullName = typeof(EventReceivers.HomeworkAssignmentER).Assembly.FullName;
+                    ContentTypes.HomeworkAssignments.RegisterEventReceiverWithContentType(spNewWeb, HomeworkAssignmentERFullName);
                     Lists.HomeworkAssignments.AssociateCTWithList(spNewWeb);
                     #endregion
 
                     #region Submission Section
                     ContentTypes.Submission.ProvisionContentType(spNewWeb);
-                    ContentTypes.Submission.RegisterEventReceiverWithContentType(spNewWeb, this.GetType().FullName);
+                    //TODO - Error registring event receiver.
+                    string SubmssionERFullName = typeof(EventReceivers.SubmissionsER).Assembly.FullName;
+                    ContentTypes.Submission.RegisterEventReceiverWithContentType(spNewWeb, SubmssionERFullName);
                     Lists.Submissions.AssociateCTWithList(spNewWeb);
                     #endregion
 

@@ -11,7 +11,7 @@ namespace ContentTypes
     {
         public static string ContentTypeName = "HomeworkAssignments";
         public static SPContentTypeId ContentTypeID { get { return new SPContentTypeId("0x0101009A3B96C126E74DE2A25A82E4BC1CB15D"); } }
-
+        public static Guid EventReceiverID { get { return new Guid("A0AE1C61-D508-4E5C-99FA-31571905505C"); } }
         public static void ProvisionContentType(SPWeb spWeb)
         {
             /* Create the content type. */
@@ -43,8 +43,8 @@ namespace ContentTypes
             //    ct.FieldLinks.Add(field);
             //}
 
-            if (!ct.Fields.Contains(SiteColumns.AssignmentGrade)){
-                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.AssignmentGrade]);
+            if (!ct.Fields.Contains(SiteColumns.LetterGrade)){
+                SPFieldLink field = new SPFieldLink(spWeb.AvailableFields[SiteColumns.LetterGrade]);
                 ct.FieldLinks.Add(field);
             }
 
@@ -85,6 +85,29 @@ namespace ContentTypes
                 ct.FieldLinks.Add(field);
             }
             ct.Update(true);
+        }
+
+        public static void RegisterEventReceiverWithContentType(SPWeb spWeb, string AssemblyFullName)
+        {
+            SPContentType ct = spWeb.ContentTypes[ContentTypeID];
+            if (ct != null)
+            {
+                /* Remove event reciever if it already exists. */
+                if (ct.EventReceivers.EventReceiverDefinitionExist(EventReceiverID)){
+                    SPEventReceiverDefinition DeletedER = ct.EventReceivers[EventReceiverID];
+                    DeletedER.Delete();
+                }
+
+                /* Add event receiver to content type. */
+                SPEventReceiverDefinition def = ct.EventReceivers.Add(EventReceiverID);
+                def.Type = SPEventReceiverType.ItemUpdated;
+                def.Assembly = AssemblyFullName;
+                def.Class = typeof(EventReceivers.HomeworkAssignmentER).FullName;
+                def.SequenceNumber = 100;
+                def.Data = "";
+                def.Update();
+                ct.Update(true, false);
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Feature xmlns="http://schemas.microsoft.com/sharepoint/" Description="This features provisions and configures site columns, lists and content types required for the Homework Tracking solution to function." Id="ad62c80e-0337-4ace-91d8-15f84197e17e" ReceiverAssembly="HomeworkTrackingSystemPrj, Version=1.0.0.0, Culture=neutral, PublicKeyToken=11675b431f1d651a" ReceiverClass="HomeworkTrackingSystemPrj.Features.KS.ProvisionArtifacts.KSEventReceiver" Scope="Web" Title="Homework Tracker - Provision Artifacts (KaloaStudios)">
   <ElementManifests>
-    <ElementManifest Location="HomeworkAssignmentER\Elements.xml" />
     <ElementManifest Location="SubmissionsER\Elements.xml" />
   </ElementManifests>
 </Feature>

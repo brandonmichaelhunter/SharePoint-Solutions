@@ -55,7 +55,7 @@
     <Compile Include="ContentTypes\HomeworkAssignments.cs" />
     <Compile Include="ContentTypes\Student.cs" />
     <Compile Include="ContentTypes\Submission.cs" />
-    <Compile Include="EventReceivers\HomeworkAssignmentER\HomeworkAssignmentER.cs" />
+    <Compile Include="EventReceivers\HomeworkAssignmentER.cs" />
     <Compile Include="EventReceivers\SubmissionsER\SubmissionsER.cs" />
     <Compile Include="Features\KS.ProvisionArtifacts\KS.EventReceiver.cs">
       <DependentUpon>KS.ProvisionArtifacts.feature</DependentUpon>
@@ -69,12 +69,10 @@
     <Compile Include="Security\SecurityGroups.cs" />
     <Compile Include="SiteColumns\SiteColumns.cs" />
     <Compile Include="Utility\Constants.cs" />
+    <Compile Include="Utility\DisabledEventScope.cs" />
     <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EventReceivers\HomeworkAssignmentER\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{5516e7ef-d5ff-4f27-ac0b-713cb062dfc2}</SharePointProjectItemId>
-    </None>
     <None Include="EventReceivers\SubmissionsER\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6326cd23-0a60-4cd8-a599-edd54ae7ab02}</SharePointProjectItemId>
     </None>
@@ -96,7 +94,6 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EventReceivers\HomeworkAssignmentER\Elements.xml" />
     <Content Include="EventReceivers\SubmissionsER\Elements.xml" />
     <Content Include="Features\KS.ProvisionArtifacts\KS.ProvisionArtifacts.Template.xml">
       <DependentUpon>KS.ProvisionArtifacts.feature</DependentUpon>

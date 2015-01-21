@@ -21,5 +21,15 @@ namespace HomeworkTrackingSystemPrj.Utility
 
             return fieldXml.ToString();
         }
+        public static string GetLetterGrade(int RawGradeValue)
+        {
+            string LetterGrade = "";
+            if(RawGradeValue < 60){LetterGrade="F";}
+            else if(RawGradeValue >= 60 || RawGradeValue < 70) {LetterGrade = "D";}
+            else if(RawGradeValue >=70 || RawGradeValue < 80) {LetterGrade = "C";}
+            else if(RawGradeValue >=80 || RawGradeValue < 90) {LetterGrade = "B";}
+            else if(RawGradeValue >=90){LetterGrade= "A";}
+            return LetterGrade;
+        }
     }
 }

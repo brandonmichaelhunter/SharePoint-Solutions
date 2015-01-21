@@ -5,12 +5,13 @@ using Microsoft.SharePoint.Security;
 using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.Workflow;
 using HomeworkTrackingSystemPrj.SiteColumns;
-
-namespace EventReceivers.SubmissionsER
+using System.Runtime.InteropServices;
+namespace EventReceivers
 {
     /// <summary>
     /// List Item Events
     /// </summary>
+    [Guid("C59DB2B1-6E41-426C-A329-148E05F85EEE")]
     public class SubmissionsER : SPItemEventReceiver
     {
        /// <summary>
@@ -19,7 +20,7 @@ namespace EventReceivers.SubmissionsER
        public override void ItemUpdated(SPItemEventProperties properties)
        {
            base.ItemUpdated(properties);
-           bool IsAssignmentComplete = (Boolean)properties.AfterProperties[properties.ListItem.Fields[SiteColumns.IsAssignmentComplete].InternalName];
+           bool IsAssignmentComplete = Convert.ToBoolean(properties.AfterProperties[properties.ListItem.Fields[SiteColumns.IsAssignmentComplete].InternalName]);
            if (IsAssignmentComplete)
            {
                /* Access the associating homework assignment on the HomeworkAssignment list and update the IsAssignmentComplete field. */
